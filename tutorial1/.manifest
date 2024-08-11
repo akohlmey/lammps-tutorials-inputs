@@ -17,5 +17,9 @@ solution/initial.partb.dat
 solution/initial.run0.png
 solution/initial.min.png
 solution/initial.mp4
+solution/improved.min.lmp
+solution/improved.min.data
+solution/improved.min.log
+solution/improved.min.png
 
 # 3) folders not known to LAMMPS GUI will be skipped
