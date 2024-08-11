@@ -2,3 +2,7 @@
 initial.lmp
 # solution files
 solution/initial.lmp
+solution/initial.partb.dat
+solution/initial.log
+solution/initial.mp4
+
