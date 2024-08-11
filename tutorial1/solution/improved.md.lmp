@@ -1,0 +1,58 @@
+# 1) Initialization
+units  lj
+dimension 3
+atom_style atomic
+boundary  p p p
+# 2) System definition
+pair_style lj/cut 4.0
+read_data improved.min.data
+
+region cylinder_in cylinder z 0 0 10 &
+   INF INF side in
+region cylinder_out cylinder z 0 0 10 &
+   INF INF side out
+group group_type_1 type 1
+group group_type_2 type 2
+group group_region_in region cylinder_in
+group group_region_out region cylinder_out
+group group_type_1_in &
+   intersect group_type_1 group_region_in
+group group_type_2_out &
+   intersect group_type_2 group_region_out
+delete_atoms group group_type_1_in
+delete_atoms group group_type_2_out
+# we don't need these four groups anymore
+group group_region_in delete
+group group_region_out delete
+group group_type_1_in delete
+group group_type_2_out delete
+# 3) Settings
+# 4) Visualization
+variable n1_in &
+   equal count(group_type_1,cylinder_in)
+variable n2_in &
+   equal count(group_type_2,cylinder_in)
+compute coor12 group_type_1 coord/atom &
+   cutoff 2.0 group group_type_2
+compute sumcoor12 group_type_1 reduce &
+   ave c_coor12
+
+thermo 1000
+thermo_style custom step temp pe ke etotal &
+  press v_n1_in v_n2_in c_sumcoor12
+
+dump mydmp all image 1000 dump.md.*.ppm &
+    type type size 600 600 zoom 1.77 &
+    shiny 0.2 fsaa yes view 0 0 box yes 0.025
+dump_modify mydmp acolor 1 darkturquoise &
+    acolor 2 darkblue adiam 1 1.6 adiam 2 4.8 &
+    backcolor white boxcolor darkgray
+
+# 5) Run
+velocity all create 1.0 4928459 &
+    mom yes rot yes dist gaussian
+fix mynve all nve
+fix mylgv all langevin 1.0 1.0 0.1 &
+    1530917 zero yes
+timestep 0.005
+run 400000
