@@ -1,5 +1,7 @@
 # input file templates
 initial.lmp
+improved.min.lmp
+improved.md.lmp
 # solution files
 solution/initial.lmp
 solution/initial.log
