@@ -1,0 +1,14 @@
+# LAMMPS Tutorial manifest file. This file determines what is downloaded when.
+# comments start with a # as the first character.
+# comments and empty lines are ignored
+##############################################################################
+# 1) input file templates
+# the first file will be automatically loaded
+unbreakable.lmp
+cnt_molecular.data
+parameters.inc
+
+# 2) solution files
+# only downloaded on request
+
+# 3) folders not known to LAMMPS GUI will be skipped
