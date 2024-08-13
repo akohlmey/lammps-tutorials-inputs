@@ -7,3 +7,5 @@ boundary f f f
 read_data breakable.data
 pair_style airebo 3.0
 pair_coeff * * CH.airebo C
+
+run 0 post no
