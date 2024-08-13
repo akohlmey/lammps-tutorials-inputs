@@ -13,5 +13,5 @@ breakable.data
 # only downloaded on request
 
 # 3) support files
-yaml-reader.yml
+yaml-reader.py
 CH.airebo
